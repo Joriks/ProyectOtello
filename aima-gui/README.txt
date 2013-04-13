@@ -110,3 +110,8 @@ New features added (inspired by course TDDC17)
 First full release based on the 3rd edition of AIMA. This projects contains all the GUI and command line demo 
 code separated out from the original AIMA2e source tree and has been updated to work with the 
 latest version of the aima-core library.
+
+Proyect Otello
+Jorge Bote Albala
+Mario Castaño Aza
+Jose Luis Moreno Jimenez
