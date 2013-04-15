@@ -1,9 +1,11 @@
 package aima.gui.applications;
 
+import aima.core.environment.otello.Otello;
 import aima.gui.applications.search.csp.MapColoringApp;
 import aima.gui.applications.search.games.ConnectFourApp;
 import aima.gui.applications.search.games.EightPuzzleApp;
 import aima.gui.applications.search.games.NQueensApp;
+import aima.gui.applications.search.games.OtelloApp;
 import aima.gui.applications.search.games.TicTacToeApp;
 import aima.gui.applications.search.map.RouteFindingAgentApp;
 import aima.gui.applications.vacuum.VacuumApp;
@@ -20,6 +22,7 @@ import aima.gui.demo.search.EightPuzzleDemo;
 import aima.gui.demo.search.MapColoringCSPDemo;
 import aima.gui.demo.search.NQueensDemo;
 import aima.gui.demo.search.NondeterministicVacuumEnvironmentDemo;
+import aima.gui.demo.search.OtelloDemo;
 import aima.gui.demo.search.TicTacToeDemo;
 
 /**
@@ -38,6 +41,8 @@ public class AimaDemoApp {
 		frame.addApp(TicTacToeApp.class);
 		frame.addApp(ConnectFourApp.class);
 		frame.addApp(MapColoringApp.class);
+		
+		frame.addApp(OtelloApp.class); //frame para ejecucion de otelloApp sobre gui
 
 		frame.addDemo(TrivialVacuumDemo.class);
 		
@@ -46,6 +51,8 @@ public class AimaDemoApp {
 		frame.addDemo(NQueensDemo.class);
 		frame.addDemo(MapColoringCSPDemo.class);
 		frame.addDemo(NondeterministicVacuumEnvironmentDemo.class);
+		
+		frame.addDemo(OtelloDemo.class); //frame para ejecucion de otelloDemo sobre gui
 
 		frame.addDemo(TTEntailsDemo.class);
 		frame.addDemo(PLFCEntailsDemo.class);
