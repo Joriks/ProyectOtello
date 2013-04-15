@@ -27,3 +27,5 @@ A8)
 A9)
 	por que no se puede usar Pair<boolean,Object> en la definicion si el retorno esta definido como Pair<Boolean, ArrayList<Pair<Short, Short>>>((boolean) false, null)
 	si object es cualquier estructura
+A10)
+	no tiene un constructor la clase

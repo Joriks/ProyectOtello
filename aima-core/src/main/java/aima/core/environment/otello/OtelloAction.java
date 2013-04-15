@@ -7,7 +7,11 @@ public class OtelloAction extends DynamicAction {
 	
 	//Action names
 	public static final String TAKE_THE_BOAT = "takeTheBoat";
-
+	public static final String PUT_WHITE_DISK = "putWhiteDisk";
+	public static final String PUT_BLACK_DISK = "putBlacDisk";
+	public static final String CONVERT_TO_WHITE = "convertToWhite";
+	public static final String CONVERT_TO_BLACK = "convertToBlack";
+	
 	//Action params
 	public static final String ATTRIBUTE_DELTA = "delta";
 	
@@ -21,15 +25,15 @@ public class OtelloAction extends DynamicAction {
 		return (Triplet<Short,Short,Short>) getAttribute(ATTRIBUTE_DELTA);
 	}
 
-	public short getM() {
+	public short getX() {
 		return getDelta().getFirst();
 	}
 
-	public short getC() {
+	public short getY() {
 		return getDelta().getSecond();
 	}
 	
-	public short getB() {
+	public short getColour() {
 		return getDelta().getThird();
 	}
 

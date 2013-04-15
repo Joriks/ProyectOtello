@@ -5,8 +5,6 @@ import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
 
-import com.sun.xml.internal.bind.v2.runtime.unmarshaller.XsiNilLoader.Array;
-
 import aima.core.agent.Action;
 import aima.core.search.framework.GraphSearch;
 import aima.core.search.framework.Problem;
@@ -38,6 +36,8 @@ public class Otello {
 				state[i][j] = 0;
 			}
 		}
+		state[3][3] = state[4][4] = 1;
+		state[3][4] = state[4][3] = 0;
 		generateDeltas();
 	}
 
@@ -107,7 +107,7 @@ public class Otello {
 	private Pair<Boolean, ArrayList<Pair<Short, Short>>> validLeftTopMove(short temp[][], Triplet<Short,Short,Short> delta){
 		
 		ArrayList<Pair<Short, Short>> middledisks = new ArrayList<Pair<Short,Short>>();
-		if(delta.getFirst()>=0 && delta.getSecond()>=0 && delta.getFirst()<=8 && delta.getSecond()<=8)
+		if(delta.getFirst()>1 && delta.getSecond()>1 && delta.getFirst()<=7 && delta.getSecond()<=7)
 			if( temp[delta.getFirst()-1][delta.getSecond()-1] != delta.getThird() && temp[delta.getFirst()-1][delta.getSecond()-1] != 0 ){
 				int j = delta.getSecond()-1;
 				for(int i = delta.getFirst()-1;i>=0 && j>=0;i--,j--){
@@ -127,8 +127,8 @@ public class Otello {
 	private Pair<Boolean, ArrayList<Pair<Short, Short>>> validLeftMove(short temp[][], Triplet<Short,Short,Short> delta){
 		
 		ArrayList<Pair<Short, Short>> middledisks = new ArrayList<Pair<Short,Short>>();
-		if(delta.getFirst()>=0 && delta.getSecond()>=0 && delta.getFirst()<=8 && delta.getSecond()<=8)
-			if( temp[delta.getFirst()-1][delta.getSecond()] != delta.getThird() && temp[delta.getFirst()-1][delta.getSecond()-1] != 0 ){
+		if(delta.getFirst()>1 && delta.getSecond()>=1 && delta.getFirst()<=7 && delta.getSecond()<=7)
+			if( temp[delta.getFirst()-1][delta.getSecond()] != delta.getThird() && temp[delta.getFirst()-1][delta.getSecond()] != 0 ){
 				for(int i = delta.getFirst()-1;i>=0;i--){
 					if(delta.getThird() == temp[i][delta.getSecond()])
 						return new Pair<Boolean, ArrayList<Pair<Short, Short>>>((boolean) true, middledisks);
@@ -146,8 +146,8 @@ public class Otello {
 	private Pair<Boolean, ArrayList<Pair<Short, Short>>> validLeftBottomMove(short temp[][], Triplet<Short,Short,Short> delta){
 		
 		ArrayList<Pair<Short, Short>> middledisks = new ArrayList<Pair<Short,Short>>();
-		if(delta.getFirst()>=0 && delta.getSecond()>=0 && delta.getFirst()<=8 && delta.getSecond()<=8)
-			if( temp[delta.getFirst()-1][delta.getSecond()+1] != delta.getThird() && temp[delta.getFirst()-1][delta.getSecond()-1] != 0 ){
+		if(delta.getFirst()>1 && delta.getSecond()>=1 && delta.getFirst()<=7 && delta.getSecond()<7)
+			if( temp[delta.getFirst()-1][delta.getSecond()+1] != delta.getThird() && temp[delta.getFirst()-1][delta.getSecond()+1] != 0 ){
 				int j = delta.getSecond()+1;
 				for(int i = delta.getFirst()-1;i>=0 && j<=8;i--,j++){
 					if(delta.getThird()==temp[i][j])
@@ -166,8 +166,8 @@ public class Otello {
 	private Pair<Boolean, ArrayList<Pair<Short, Short>>> validTopMove(short temp[][], Triplet<Short,Short,Short> delta){
 		
 		ArrayList<Pair<Short, Short>> middledisks = new ArrayList<Pair<Short,Short>>();
-		if(delta.getFirst()>=0 && delta.getSecond()>=0 && delta.getFirst()<=8 && delta.getSecond()<=8)
-			if( temp[delta.getFirst()][delta.getSecond()-1] != delta.getThird() && temp[delta.getFirst()-1][delta.getSecond()-1] != 0 ){
+		if(delta.getFirst()>=1 && delta.getSecond()>1 && delta.getFirst()<=7 && delta.getSecond()<=7)
+			if( temp[delta.getFirst()][delta.getSecond()-1] != delta.getThird() && temp[delta.getFirst()][delta.getSecond()-1] != 0 ){
 				for(int j = delta.getSecond()-1;j>=0;j--){
 					if(delta.getThird()==temp[delta.getFirst()][j])
 						return new Pair<Boolean, ArrayList<Pair<Short, Short>>>((boolean) true, middledisks);
@@ -185,8 +185,8 @@ public class Otello {
 	private Pair<Boolean, ArrayList<Pair<Short, Short>>> validBottomMove(short temp[][], Triplet<Short,Short,Short> delta){
 		
 		ArrayList<Pair<Short, Short>> middledisks = new ArrayList<Pair<Short,Short>>();
-		if(delta.getFirst()>=0 && delta.getSecond()>=0 && delta.getFirst()<=8 && delta.getSecond()<=8)
-			if( temp[delta.getFirst()][delta.getSecond()+1] != delta.getThird() && temp[delta.getFirst()-1][delta.getSecond()-1] != 0 ){
+		if(delta.getFirst()>=1 && delta.getSecond()>=1 && delta.getFirst()<=7 && delta.getSecond()<7)
+			if( temp[delta.getFirst()][delta.getSecond()+1] != delta.getThird() && temp[delta.getFirst()][delta.getSecond()+1] != 0 ){
 				for(int j = delta.getSecond()+1;j<=8;j++){
 					if(delta.getThird()==temp[delta.getFirst()][j])
 						return new Pair<Boolean, ArrayList<Pair<Short, Short>>>((boolean) true, middledisks);
@@ -204,8 +204,8 @@ public class Otello {
 	private Pair<Boolean, ArrayList<Pair<Short, Short>>> validRightTopMove(short temp[][], Triplet<Short,Short,Short> delta){
 		
 		ArrayList<Pair<Short, Short>> middledisks = new ArrayList<Pair<Short,Short>>();
-		if(delta.getFirst()>=0 && delta.getSecond()>=0 && delta.getFirst()<=8 && delta.getSecond()<=8)
-			if( temp[delta.getFirst()+1][delta.getSecond()-1] != delta.getThird() && temp[delta.getFirst()-1][delta.getSecond()-1] != 0 ){
+		if(delta.getFirst()>=1 && delta.getSecond()>1 && delta.getFirst()<7 && delta.getSecond()<=7)
+			if( temp[delta.getFirst()+1][delta.getSecond()-1] != delta.getThird() && temp[delta.getFirst()+1][delta.getSecond()-1] != 0 ){
 				int j = delta.getSecond()-1;
 				for(int i = delta.getFirst()+1;i<=8 && j>=0;i++,j--){
 					if(delta.getThird()==temp[i][j])
@@ -224,8 +224,8 @@ public class Otello {
 	private Pair<Boolean, ArrayList<Pair<Short, Short>>> validRightMove(short temp[][], Triplet<Short,Short,Short> delta){
 		
 		ArrayList<Pair<Short, Short>> middledisks = new ArrayList<Pair<Short,Short>>();
-		if(delta.getFirst()>=0 && delta.getSecond()>=0)
-			if( temp[delta.getFirst()+1][delta.getSecond()] != delta.getThird() && temp[delta.getFirst()-1][delta.getSecond()-1] != 0 ){
+		if(delta.getFirst()>=1 && delta.getSecond()>=1 && delta.getFirst()<7 && delta.getSecond()<=7)
+			if( temp[delta.getFirst()+1][delta.getSecond()] != delta.getThird() && temp[delta.getFirst()+1][delta.getSecond()] != 0 ){
 				for(int i = delta.getFirst()+1;i<=8;i++){
 					if(delta.getThird()==temp[i][delta.getSecond()])
 						return new Pair<Boolean, ArrayList<Pair<Short, Short>>>((boolean) true, middledisks);
@@ -243,8 +243,8 @@ public class Otello {
 	private Pair<Boolean, ArrayList<Pair<Short, Short>>> validRigthBottomMove(short temp[][], Triplet<Short,Short,Short> delta){
 		
 		ArrayList<Pair<Short, Short>> middledisks = new ArrayList<Pair<Short,Short>>();
-		if(delta.getFirst()>=0 && delta.getSecond()>=0 && delta.getFirst()<=8 && delta.getSecond()<=8)
-			if( temp[delta.getFirst()+1][delta.getSecond()+1] != delta.getThird() && temp[delta.getFirst()-1][delta.getSecond()-1] != 0 ){
+		if(delta.getFirst()>=1 && delta.getSecond()>=1 && delta.getFirst()<7 && delta.getSecond()<7)
+			if( temp[delta.getFirst()+1][delta.getSecond()+1] != delta.getThird() && temp[delta.getFirst()+1][delta.getSecond()+1] != 0 ){
 				int j = delta.getSecond()+1;
 				for(int i = delta.getFirst()+1;i<=8 && j<=8;i++,j++){
 					if(delta.getThird()==temp[i][j])
@@ -349,8 +349,33 @@ public class Otello {
 	}
 	
 	public static void main(String[] args) {
+		Problem problem = new Problem(new Otello(),
+				OtelloFunctionFactory.getActionsFunction(),
+				OtelloFunctionFactory.getResultFunction(),
+				new OtelloGoalTest());
 		
+		Search search = new DepthFirstSearch(new GraphSearch());
+
+		try{
+			SearchAgent agent = new SearchAgent(problem, search);
+			//El agente es el que une el problema con el algoritmo de busqueda
+			System.out.println("Actions");
+			List<Action> actions = agent.getActions();
+			for(Action action: actions)
+				System.out.println(action);
+			
+			System.out.println("Metrics");
+			Iterator<Object> iter = agent.getInstrumentation().keySet().iterator();
+			while (iter.hasNext()) {
+				String key = (String) iter.next();
+				System.out.println(key+": "+agent.getInstrumentation().getProperty(key));
+			}
+			
+			
+		}catch(Exception e){
+			System.err.println("Capturada Exception: " + e.getMessage());
+			e.printStackTrace();
+		}
 	}
-	
 	
 }

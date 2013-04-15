@@ -10,11 +10,11 @@ import aima.core.search.framework.ResultFunction;
 import aima.core.util.datastructure.Triplet;
 
 public class OtelloFunctionFactory {
-	
+	//A10
 	private static ActionsFunction actionsFunction = null;
 	private static ResultFunction resultFunction = null;
 
-	public static ActionsFunction getActionsFunctions() {
+	public static ActionsFunction getActionsFunction() {
 		if(null == actionsFunction)
 			actionsFunction = new OtelloActionsFunction();
 		return actionsFunction;
@@ -38,7 +38,15 @@ public class OtelloFunctionFactory {
 			//para cada delta valido crear accion y anadirla a conjunto
 			for(Triplet<Short,Short,Short> delta: deltas)
 				if(mc.validMove(delta))
-					actions.add(new OtelloAction(OtelloAction.TAKE_THE_BOAT,delta));
+					if(delta.getThird() == 1){
+						actions.add(new OtelloAction(OtelloAction.PUT_WHITE_DISK,delta));
+						actions.add(new OtelloAction(OtelloAction.CONVERT_TO_WHITE,delta));
+					}
+					else
+						if(delta.getThird() == 2){
+							actions.add(new OtelloAction(OtelloAction.PUT_BLACK_DISK,delta));
+							actions.add(new OtelloAction(OtelloAction.CONVERT_TO_BLACK,delta));
+						}
 			
 			return actions;
 		}
@@ -56,9 +64,17 @@ public class OtelloFunctionFactory {
 				Otello newState = new Otello();
 				newState.setState(state.getState());
 				
-				if (cAction.getName() == OtelloAction.TAKE_THE_BOAT)
-					newState.takeTheBoat(cAction.getDelta());
-				
+				if (cAction.getName() == OtelloAction.PUT_WHITE_DISK)
+					newState.putDisk(cAction.getDelta());
+				else
+					if(cAction.getName() == OtelloAction.PUT_BLACK_DISK)
+						newState.putDisk(cAction.getDelta());
+					else
+						if(cAction.getName() == OtelloAction.CONVERT_TO_WHITE)
+							newState.convertDisks(cAction.getDelta());
+						else
+							if(cAction.getName() == OtelloAction.CONVERT_TO_BLACK)
+								newState.convertDisks(cAction.getDelta());
 				s = newState;
 			}
 				
