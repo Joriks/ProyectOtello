@@ -1,6 +1,29 @@
-Preguntas Roberto
+Preguntas y Dudas
 A1)
 	hay que usar un espacio temporal para la modificación del espacio de estados, o se puede operar sobre el propio espacio
 de estados.
 A2)
 	58 Warnings sobre el codigo limpio de aima-core, aima-gui, aima-osm, que podemos hacer con ellos.
+A3)
+	usar triplets con array indefinido, o usar ArrayList<Triplet>, que pasaría en caso de array indefinido, con deltas dependientes de la ejecucion
+	porque es necesario un @SuppressWarnings("unchecked"), con el Triplet<Short,Short,Short>
+A4)
+	Diferencias entre ArrayList y List
+	**List es una interface, ArrayList una implementación de la interface List
+A5)
+	se puede hacer una copia sobre unos valores de una mesh sin ser completa, algo así como definiendo un rango, sin tener que ir uno por uno
+A6)
+	hacer modulo aparte o todo dentro del if
+	**modulo para cada zona vertical, horizontal y diagonal
+A7)
+	se supone una accion el poner una ficha y las conversiones de las fichas adyacentes, o por contra son acciones distintas y para cada conversion
+	una accion nueva.
+	
+A8)
+	como hacemos para cambiar entre un jugador y otro
+	**se podria observar la ultima action, ver el color de la ficha y elegir entre los deltas los de color contrario
+	Algoritmo minmax con poda alfa-beta
+	**posible poda sobre el entorno en que haya fichas, si no hay fichas adyacentes no tiene sentido ver si podemos meter una ficha
+A9)
+	por que no se puede usar Pair<boolean,Object> en la definicion si el retorno esta definido como Pair<Boolean, ArrayList<Pair<Short, Short>>>((boolean) false, null)
+	si object es cualquier estructura
