@@ -1,0 +1,10 @@
+
+Juego:Reversi
+	Jugador "Inteligente"
+		Busqueda con adversario
+			min-max poda alfa-beta
+				requisito: ordenacion correcta nodos
+	Estimacion
+	Funcion. estimacion : Algoritmo aprendizaje
+Despues de la fase de aprendizaje debe haber una fase de prueba, implementación con modo automatico, manual o auto one step
+No hace falta guardar el aprendizaje de la partida, para otra ejecucion, pero dentro de la ejecucion si debe estar presente.** se puede hacer persistente
