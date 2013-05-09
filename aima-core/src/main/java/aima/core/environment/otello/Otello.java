@@ -37,7 +37,7 @@ public class Otello {
 			}
 		}
 		state[3][3] = state[4][4] = 1;
-		state[3][4] = state[4][3] = 0;
+		state[3][4] = state[4][3] = 2;
 		generateDeltas();
 	}
 
