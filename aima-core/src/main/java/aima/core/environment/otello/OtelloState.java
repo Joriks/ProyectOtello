@@ -45,6 +45,14 @@ public class OtelloState implements Cloneable{
 		board[3][4] = board[4][3] = black;
 	}
 	
+	public String getAdversary(){
+		
+		if(playerToMove == "1")
+			return "2";
+		else
+			return "1";
+	}
+	
 	public String getPlayerToMove() {
 		return playerToMove;
 	}
@@ -92,12 +100,6 @@ public class OtelloState implements Cloneable{
 		a6 = convertRightBottom(col, row);
 		a7 = convertRight(col, row);
 		a8 = convertRightTop(col, row);
-/*		if(	convertLeftTop(col,row) || convertLeft(col,row) || 
-			convertLeftBottom(col,row) || convertTop(col,row) || 
-			convertBottom(col,row) || convertRightTop(col,row) || 
-			convertRight(col,row) || convertRightBottom(col,row))
-			return true;
-		return false;*/
 		if(a1 || a2 || a3 || a4 || a5 || a6 || a7 || a8){
 			return true;
 		}
@@ -109,7 +111,6 @@ public class OtelloState implements Cloneable{
 	private boolean convertLeftTop(int col, int row) {
 		// TODO Auto-generated method stub
 		String temp[][] = cloneM(board);
-		System.out.println("");
 		if(col>1 && row >1 && col <=7 && row<=7)
 			if(temp[col-1][row-1] != getPlayerToMove() && temp[col-1][row-1] != EMPTY){
 				int j = row-1;
@@ -305,6 +306,8 @@ public class OtelloState implements Cloneable{
 				return EMPTY;
 		
 	}
+	
+	
 
 	public List<XYLocation> getUnMarkedPositions() {
 		// TODO Auto-generated method stub
@@ -338,5 +341,16 @@ public class OtelloState implements Cloneable{
 			copy[i] = tab[i].clone();
 		return copy;
 	}
-
+	
+	public int get_Col(){
+		return board.length;
+	}
+	
+	public int get_Row(){
+		return board[0].length;
+	}
+	
+	public int getMoves(){
+		return 60-leftmoves;
+	}
 }

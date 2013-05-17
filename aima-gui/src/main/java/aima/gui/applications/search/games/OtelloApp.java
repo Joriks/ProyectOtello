@@ -17,6 +17,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JToolBar;
 
+import aima.core.environment.connectfour.ConnectFourAIPlayer;
 import aima.core.environment.otello.OtelloAIPlayer;
 import aima.core.environment.otello.OtelloGame;
 import aima.core.environment.otello.OtelloState;
@@ -51,6 +52,7 @@ public class OtelloApp {
 			ActionListener {
 		private static final long serialVersionUID = 1L;
 		JComboBox strategyCombo;
+		JComboBox timeCombo;
 		JButton clearButton;
 		JButton proposeButton;
 		JButton[][] squares;
@@ -65,11 +67,12 @@ public class OtelloApp {
 			this.setLayout(new BorderLayout());
 			JToolBar tbar = new JToolBar();
 			tbar.setFloatable(false);
-			strategyCombo = new JComboBox(new String[] { "Minimax",
-					"Alpha-Beta", "Iterative Deepening Alpha-Beta",
-					"Iterative Deepening Alpha-Beta (log)" });
+			strategyCombo = new JComboBox(new String[] {"OtelloAIPlayer", "OtelloAIPlayer (log)" });
+			timeCombo = new JComboBox(new String[] { "5sec", "10sec", "15sec","20sec", "30sec", "1min" });
+			timeCombo.setSelectedIndex(2);
 			strategyCombo.setSelectedIndex(1);
 			tbar.add(strategyCombo);
+			tbar.add(timeCombo);
 			tbar.add(Box.createHorizontalGlue());
 			clearButton = new JButton("Clear");
 			clearButton.addActionListener(this);
@@ -136,24 +139,43 @@ public class OtelloApp {
 
 		/** Uses adversarial search for selecting the next action. */
 		private void proposeMove() {
-			AdversarialSearch<OtelloState, XYLocation> search;
+			AdversarialSearch<OtelloState, XYLocation> search = null;
 			XYLocation action;
+			int time = 15;
+			switch (timeCombo.getSelectedIndex()){
+				case 0:
+					time = 5;
+					break;
+				case 1:
+					time = 10;
+					break;
+				case 2:
+					time = 15;
+				case 3:
+					time = 20;
+					break;
+				case 4:
+					time = 30;
+					break;
+				case 5:
+					time = 60;
+					break;
+			}			
 			switch (strategyCombo.getSelectedIndex()) {
-			case 0:
-				search = MinimaxSearch.createFor(game);
-				break;
-			case 1:
-				search = AlphaBetaSearch.createFor(game);
-				break;
-			case 2:
-				search = IterativeDeepeningAlphaBetaSearch.createFor(game, 0.0,
-						1.0, 1000);
-				break;
-			default:
-				search = IterativeDeepeningAlphaBetaSearch.createFor(game, 0.0,
-						1.0, 1000);
-				((IterativeDeepeningAlphaBetaSearch<?, ?, ?>) search)
-						.setLogEnabled(true);
+				case 0:
+					search = new OtelloAIPlayer(game, time);
+					break;
+				case 1:
+					search = new OtelloAIPlayer(game, time);
+					((OtelloAIPlayer) search).setLogEnabled(true);
+					break;
+				default:
+					search = new OtelloAIPlayer(game, time);
+					((OtelloAIPlayer) search).setLogEnabled(true);
+			
+				/*default:
+					search = new OtelloAIPlayer(game, time);
+					((OtelloAIPlayer) search).setLogEnabled(true);*/
 			}
 			action = search.makeDecision(currState);
 			searchMetrics = search.getMetrics();
