@@ -10,3 +10,5 @@ public class OtelloAIPlayer extends IterativeDeepeningAlphaBetaSearch<OtelloStat
 	}
 
 }
+
+
