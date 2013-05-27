@@ -27,7 +27,7 @@ public class IterativeDeepeningAlphaBetaSearch<STATE, ACTION, PLAYER>
 	protected double utilMax;
 	protected double utilMin;
 	protected int currDepthLimit;
-	private boolean maxDepthReached;
+	public boolean maxDepthReached;
 	private long maxTime;
 	private boolean logEnabled;
 
@@ -165,7 +165,7 @@ public class IterativeDeepeningAlphaBetaSearch<STATE, ACTION, PLAYER>
 	 * search step. This implementation increments the current depth limit by
 	 * one.
 	 */
-	protected void incrementDepthLimit() {
+	public void incrementDepthLimit() {
 		currDepthLimit++;
 	}
 

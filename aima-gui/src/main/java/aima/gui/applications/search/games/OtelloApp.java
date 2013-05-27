@@ -192,8 +192,13 @@ public class OtelloApp {
 					statusText = "black has won :-)";
 				else
 					statusText = "No winner...";
-			else
-				statusText = "Next move: " + game.getPlayer(currState);
+			else{
+				if(game.getPlayer(currState) == "1")
+					statusText = "Next move: X";
+				else
+					statusText = "Next move: O";
+				
+			}
 			if (searchMetrics != null)
 				statusText += "    " + searchMetrics;
 			statusBar.setText(statusText);

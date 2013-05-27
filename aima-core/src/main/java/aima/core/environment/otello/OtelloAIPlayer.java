@@ -36,6 +36,7 @@ public class OtelloAIPlayer extends IterativeDeepeningAlphaBetaSearch<OtelloStat
             else
                 return -100;
         }
+        //incrementDepthLimit();
 
         // if game isn't over, return relative advatage
         return score;
