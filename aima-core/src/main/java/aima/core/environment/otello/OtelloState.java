@@ -41,8 +41,11 @@ public class OtelloState implements Cloneable{
 				board[i][j] = EMPTY;
 			}
 		}
-		board[3][3] = board[4][4] = white;
+/*		board[3][3] = board[4][4] = white;
 		board[3][4] = board[4][3] = black;
+		*/
+		board[1][4] = board[3][6] = white;
+		board[1][5] = board[2][6] = board[2][7] = black;
 	}
 	
 	public String getAdversary(){
@@ -111,10 +114,10 @@ public class OtelloState implements Cloneable{
 	private boolean convertLeftTop(int col, int row) {
 		// TODO Auto-generated method stub
 		String temp[][] = cloneM(board);
-		if(col>1 && row >1 && col <=7 && row<=7)
+		if(col>0 && row >0 && col <=7 && row<=7)
 			if(temp[col-1][row-1] != getPlayerToMove() && temp[col-1][row-1] != EMPTY){
 				int j = row-1;
-				for(int i = col-1;i>=0 && row>=0;i--,j--)
+				for(int i = col-1;i>=0 && j>=0;i--,j--)
 					if(getPlayerToMove() == temp[i][j]){
 						board = cloneM(temp);
 						return true;
@@ -133,7 +136,7 @@ public class OtelloState implements Cloneable{
 	private boolean convertLeft(int col, int row) {
 		// TODO Auto-generated method stub
 		String temp [][] =  cloneM(board);
-		if(col>1 && row >=1 && col <=7 && row<=7)
+		if(col>0 && row >=0 && col <=7 && row<=7)
 			if(temp[col-1][row] != getPlayerToMove() && temp[col-1][row] != EMPTY){
 				for(int i = col-1;i>=0;i--)
 					if(getPlayerToMove() == temp[i][row]){
@@ -154,10 +157,10 @@ public class OtelloState implements Cloneable{
 	private boolean convertLeftBottom(int col, int row) {
 		// TODO Auto-generated method stub
 		String temp [][] =  cloneM(board);
-		if(col>1 && row >=1 && col <=7 && row<7)
+		if(col>0 && row >0 && col <=7 && row<7)
 			if(temp[col-1][row+1] != getPlayerToMove() && temp[col-1][row+1] != EMPTY){
 				int j = row+1;
-				for(int i = col-1;i>=0 && row>=0;i--,j++)
+				for(int i = col-1;i>=0 && j>=0;i--,j++)
 					if(getPlayerToMove() == temp[i][j]){
 						board = cloneM(temp);
 						return true;
@@ -176,7 +179,7 @@ public class OtelloState implements Cloneable{
 	private boolean convertTop(int col, int row) {
 		// TODO Auto-generated method stub
 		String temp [][] =  cloneM(board);
-		if(col>=1 && row >1 && col <=7 && row<=7)
+		if(col>=0 && row >0 && col <=7 && row<=7)
 			if(temp[col][row-1] != getPlayerToMove() && temp[col][row-1] != EMPTY){
 				for(int j = row-1;j>=0;j--)
 					if(getPlayerToMove() == temp[col][j]){
@@ -196,9 +199,9 @@ public class OtelloState implements Cloneable{
 	private boolean convertBottom(int col, int row) {
 		// TODO Auto-generated method stub
 		String temp [][] =  cloneM(board);
-		if(col>=1 && row >=1 && col <=7 && row<7)
+		if(col>=0 && row >=0 && col <=7 && row<7)
 			if(temp[col][row+1] != getPlayerToMove() && temp[col][row+1] != EMPTY){
-				for(int j = row+1;j<=8;j++)
+				for(int j = row+1;j<8;j++)
 					if(getPlayerToMove() == temp[col][j]){
 						board = cloneM(temp);
 						return true;
@@ -217,10 +220,10 @@ public class OtelloState implements Cloneable{
 	private boolean convertRightTop(int col, int row) {
 		// TODO Auto-generated method stub
 		String temp [][] =  cloneM(board);
-		if(col>=1 && row >1 && col <7 && row<=7)
+		if(col>=0 && row > 0 && col <7 && row<7)
 			if(temp[col+1][row-1] != getPlayerToMove() && temp[col+1][row-1] != EMPTY){
 				int j = row-1;
-				for(int i = col+1;i<=8 && j>=0;i++,j--)
+				for(int i = col+1;i<8 && j>=0;i++,j--)
 					if(getPlayerToMove() == temp[i][j]){
 						board = cloneM(temp);
 						return true;
@@ -239,9 +242,9 @@ public class OtelloState implements Cloneable{
 	private boolean convertRight(int col, int row) {
 		// TODO Auto-generated method stub
 		String temp [][] =  cloneM(board);
-		if(col>=1 && row >=1 && col <7 && row<=7)
+		if(col>=0 && row >=0 && col <7 && row<=7)
 			if(temp[col+1][row] != getPlayerToMove() && temp[col+1][row] != EMPTY){
-				for(int i = col+1;i<=8;i++)
+				for(int i = col+1;i<8;i++)
 					if(getPlayerToMove() == temp[i][row]){
 						board = cloneM(temp);
 						return true;
@@ -260,10 +263,10 @@ public class OtelloState implements Cloneable{
 	private boolean convertRightBottom(int col, int row) {
 		// TODO Auto-generated method stub
 		String temp [][] =  cloneM(board);
-		if(col>=1 && row >=1 && col <7 && row<7)
+		if(col>=0 && row >=0 && col <7 && row<7)
 			if(temp[col+1][row+1] != getPlayerToMove() && temp[col+1][row+1] != EMPTY){
 				int j = row+1;
-				for(int i = col+1;i<=8 && row<=8;i++,j++)
+				for(int i = col+1;i<8 && j<8;i++,j++){
 					if(getPlayerToMove() == temp[i][j]){
 						board = cloneM(temp);
 						return true;
@@ -274,6 +277,7 @@ public class OtelloState implements Cloneable{
 						else
 							return false;
 					}
+				}
 				
 			}
 		return false;
